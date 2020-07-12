@@ -9,7 +9,9 @@
     </head>
     
     <body>
-        <h1 style="jumbotron"> Sign Up ! </h1>
+        <h1> Sign Up ! </h1>
+        <header>Please Fill out all highlighted areas to sign up.</header> <br><br> 
+        
 <form id="signupForm" method="post" action="welcome.html">         
         First Name:  <input type="text" name="fName"><br>
         Last Name:   <input type="text" name="lName"><br>
@@ -19,11 +21,11 @@
         Zip Code:    <input type="text" name="zip" id="zip"><br> 
         City:        <span id="city"></span><br> 
         Latitude:   <span id ="latitude"></span><br>
-        Longitude:  <span id = "longitude"></span><br>
+        Longitude:  <span id ="longitude"></span><br>
         
         State: <select id="state"  name="state" class="form-control">
-        <option value = "">One ONLY</option>
-          </select>
+        <option value = "">Select one!</option> <br><br> 
+          </select> <br> <br> 
       <!--
         <select id="state" name"state">
                 <option value="">Select One</option>
@@ -35,11 +37,11 @@
         Select a County: <select id="county"></select><br><br>
         
         Desired User Name: <input type="text" id="username" name="username"><br>
-                           <span id="usernameError"></span>
+                           <span id="usernameError"></span><br><br> 
         Password:          <input type="text" id="password" name="password"><br> 
-        Password Again:    <input type="text" id="PasswordAgain"><br> 
-                        <span id="passwordAgainError"></span><br> 
-        <input type="submit" value="Sign Up!">
+        Password Again:    <input type="text" id="passwordAgain"><br> 
+                        <span id="passwordAgainError"></span><br> <br>
+        <input class="button button1" type="submit" value="Sign Up!">
 </form>
     <script>
     var usernameAvailable = false; 
@@ -98,16 +100,16 @@
                     }
                     
                 });//ajax
-                //alert($("#username").val());
-            }); //username
-            
-             $("#singupForm").on("submit", function(e){
                 
-                if(!isFormValid()){
-                    e.preventDefault();
-                }
+            }); //username
+      
+            $("#signupForm").on("submit", function(e) {
+            //alert(usernameAvailable);
+                if(!isFormValid()) {
+                e.preventDefault();   
+            }
+        
             });
-            
             
             function isFormValid(){
                 var isValid = true;
@@ -119,7 +121,7 @@
                     $("#usernameError").html("Username is required");
                 }
                 
-                if($("#password").val().length < 6){
+                if($("#password").val().length < 5) {
                     $("#passwordAgainError").html("Password Must Be At Least 6 Characters!");
                     isValid = false;
                 }
@@ -129,7 +131,7 @@
                 }
                 return isValid;
             }
-            
+   
                         $.ajax({
                     method: "GET",
                     url: "https://cst336.herokuapp.com/projects/api/state_abbrAPI.php",
